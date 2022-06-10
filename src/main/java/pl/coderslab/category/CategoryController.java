@@ -81,7 +81,7 @@ public class CategoryController {
     public String deleteCategory(@PathVariable long id,@AuthenticationPrincipal UserDetails userDetails){
         userCategoryRepository.deleteByCategoryId(id);
         categoryRepository.deleteById(id);
-        return "category";
+        return "redirect:/app/category";
     }
 
     @GetMapping("/category/words/{id}")
