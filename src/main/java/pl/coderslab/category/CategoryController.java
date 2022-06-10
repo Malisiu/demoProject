@@ -18,6 +18,7 @@ import pl.coderslab.word.Word;
 import pl.coderslab.word.WordRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/app")
@@ -76,11 +77,11 @@ public class CategoryController {
         userCategoryRepository.save(userCategory);
         return "redirect:/app/category";
     }
-    @GetMapping("/category/{id}")
+    @GetMapping(value = "/category/{id}")
     public String deleteCategory(@PathVariable long id,@AuthenticationPrincipal UserDetails userDetails){
         userCategoryRepository.deleteByCategoryId(id);
         categoryRepository.deleteById(id);
-        return "redirect:/app/category";
+        return "category";
     }
 
     @GetMapping("/category/words/{id}")
@@ -149,4 +150,18 @@ public class CategoryController {
         return "redirect:/app/category/sentence/own/" + id;
     }
 
+    @GetMapping("/category/wordRemove/{id}")
+    public String deleteWord(@PathVariable long id){
+        Optional<Word> byId = wordRepository.findById(id);
+        userWordRepository.deleteUserWord(id);
+        wordRepository.deleteById(id);
+        return "redirect:/app/category/words/own/" + byId.get().getCategory().getId();
+    }
+    @GetMapping("/category/sentenceRemove/{id}")
+    public String deleteSentence(@PathVariable long id){
+        Optional<Word> byId = wordRepository.findById(id);
+        userWordRepository.deleteUserWord(id);
+        wordRepository.deleteById(id);
+        return "redirect:/app/category/sentence/own/" + byId.get().getCategory().getId();
+    }
 }

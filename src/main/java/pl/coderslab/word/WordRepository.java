@@ -11,6 +11,4 @@ public interface WordRepository extends JpaRepository<Word,Long> {
 
     List<Word> findAllByCategory_Id(long id);
 
-
-
 }
