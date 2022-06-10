@@ -199,8 +199,8 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Sentence</h1>
-                    <a href="/app/categoryAdd" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Add category</a>
+                    <a href="/app/sentenceAdd/${categoryId}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Add sentence</a>
                 </div>
 
                 <!-- Content Row -->
@@ -209,8 +209,9 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th><p class="text-center">Polish sentence</p></th>
-                            <th><p class="text-center">English sentence</p></th>
+                            <th><p class="text-center">Polish Sentence</p></th>
+                            <th><p class="text-center">English Sentence</p></th>
+                            <th><p class="text-center">Buttons</p></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -222,6 +223,11 @@
                                 </td>
                                 <td>
                                     <p class="text-center text-primary ">${info.sentenceEn}</p>
+                                </td>
+                                <td width="15%">
+                                    <a href="/app/category/words/own/${info.id}" class="text-warning">Words</a>
+                                    <a href="/app/category/sentence/own/${info.id}" class="text-warning text-right">Sentence</a>
+                                    <a href="/app/category/${info.id}" class="text-danger text-right">Remove</a>
                                 </td>
                             </tr>
                         </c:forEach>

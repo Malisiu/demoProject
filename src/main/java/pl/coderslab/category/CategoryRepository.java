@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.coderslab.word.Word;
 
 import java.util.List;
 @Repository
@@ -23,6 +24,12 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
 
     @Query("select c from Category c where c.id = ?1")
     Category selectCat(Long id);
+
+    @Query("select w from Word w where w.category.id = ?1 and w.wordPl is not null ")
+    List<Word> findAllOwnWords(Long id);
+
+    @Query("select w from Word w where w.category.id = ?1 and w.sentencePl is not null ")
+    List<Word> findAllOwnSentence(Long id);
 
 
 

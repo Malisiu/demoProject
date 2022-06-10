@@ -17,6 +17,8 @@ import pl.coderslab.user_words.UserWords;
 import pl.coderslab.word.Word;
 import pl.coderslab.word.WordRepository;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/app")
 public class CategoryController {
@@ -95,14 +97,15 @@ public class CategoryController {
 
     @GetMapping("/category/words/own/{id}")
     public String printOwnWords(@PathVariable Long id,@AuthenticationPrincipal UserDetails userDetails,Model model){
-        model.addAttribute("words",wordRepository.findAllByCategory_Id(id));
+        model.addAttribute("words",categoryRepository.findAllOwnWords(id));
         model.addAttribute("categoryId",id);
         return "ownWords";
     }
 
     @GetMapping("/category/sentence/own/{id}")
     public String printOwnSentence(@PathVariable Long id,@AuthenticationPrincipal UserDetails userDetails,Model model){
-        model.addAttribute("sentence",wordRepository.findAllByCategory_Id(id));
+        model.addAttribute("sentence",categoryRepository.findAllOwnSentence(id));
+        model.addAttribute("categoryId",id);
         return "ownSentence";
     }
 
@@ -120,9 +123,30 @@ public class CategoryController {
         word.setSentencePl(null);
         word.setCategory(category);
         wordRepository.save(word);
+        List<Word> allByCategory_id = wordRepository.findAllByCategory_Id(category.getId());
         User byEmail = userRepository.findByEmail(userDetails.getUsername());
-        userWordRepository.createUserWord(byEmail.getId(),word.getId());
+        userWordRepository.createUserWord(byEmail.getId(),allByCategory_id.get(allByCategory_id.size() - 1).getId());
         return "redirect:/app/category/words/own/" + id;
+    }
+
+    @GetMapping("/sentenceAdd/{id}")
+    public String addSentence(@PathVariable long id,Model model,@AuthenticationPrincipal UserDetails userDetails){
+        model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        model.addAttribute("categoryId",id);
+        return "sentenceAdd";
+    }
+
+    @PostMapping("/sentenceAdd/{id}")
+    public String addSentenceAction(@PathVariable long id,Word word,@AuthenticationPrincipal UserDetails userDetails){
+        Category category = categoryRepository.selectCat(id);
+        word.setWordEn(null);
+        word.setWordPl(null);
+        word.setCategory(category);
+        wordRepository.save(word);
+        List<Word> allByCategory_id = wordRepository.findAllByCategory_Id(category.getId());
+        User byEmail = userRepository.findByEmail(userDetails.getUsername());
+        userWordRepository.createUserWord(byEmail.getId(),allByCategory_id.get(allByCategory_id.size() - 1).getId());
+        return "redirect:/app/category/sentence/own/" + id;
     }
 
 }
