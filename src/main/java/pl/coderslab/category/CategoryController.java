@@ -40,7 +40,11 @@ public class CategoryController {
         model.addAttribute("basic",categoryRepository.basicCategory());
         model.addAttribute("noBasic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
-        return "category";dd
+        for (int i = 0;i < 2;i++){
+
+        }
+        return "category";
+
     }
 
     @GetMapping("/achivments")
