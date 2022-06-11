@@ -203,8 +203,19 @@
                 </div>
 
                 <!-- Content Row -->
-                <div class="row">
-
+                <div class="startApp">
+                    <div class="">
+                        <a><p class="btn btn-primary btn user">Basic words</p></a>
+                    </div>
+                    <div>
+                        <a><p class="btn btn-primary btn user">Basic sentence</p></a>
+                    </div>
+                    <div>
+                        <a><p class="btn btn-primary btn user">Own words</p></a>
+                    </div>
+                    <div>
+                        <a><p class="btn btn-primary btn user">Own sentence</p></a>
+                    </div>
 
                 </div>
 
