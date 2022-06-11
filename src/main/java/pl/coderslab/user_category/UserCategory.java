@@ -26,6 +26,7 @@ public class UserCategory {
         return isAchivedWord;
     }
 
+
     public void setAchivedWord(boolean achivedWord) {
         isAchivedWord = achivedWord;
     }

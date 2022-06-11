@@ -208,15 +208,25 @@
                         <thead>
                         <tr>
                             <th><p class="text-center">Achivment name</p></th>
+                            <th><p class="text-center">Type</p></th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        <c:forEach items="${ranking}"  var="info">
+                        <c:forEach items="${words}"  var="info">
                             <tr>
-                                <td>${info.nickName}</td>
-                                <td>0</td>
-                                <td>${info.points}</td>
+                                <td><p class="text-center text-primary">${info.category.name}</p></td>
+                                <td>Word</td>
+                            </tr>
+                        </c:forEach>
+
+                        </tbody>
+                        <tbody>
+
+                        <c:forEach items="${sentence}"  var="info">
+                            <tr>
+                                <td><p class="text-center">${info.category.name}</p></td>
+                                <td>Sentence</td>
                             </tr>
                         </c:forEach>
 

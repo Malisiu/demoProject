@@ -49,7 +49,10 @@ public class CategoryController {
 
     @GetMapping("/achivments")
     public String printAchivment(@AuthenticationPrincipal UserDetails userDetails,Model model){
-        model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        User byEmail = userRepository.findByEmail(userDetails.getUsername());
+        model.addAttribute("user",byEmail);
+        model.addAttribute("words",userCategoryRepository.findByWordAchived(byEmail.getId()));
+        model.addAttribute("sentence",userCategoryRepository.findBySentenceAchived(byEmail.getId()));
         return "achivments";
     }
 
