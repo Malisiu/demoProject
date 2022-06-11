@@ -199,41 +199,27 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Sentence</h1>
-                    <a href="/app/sentenceAdd/${categoryId}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Add sentence</a>
+                    <a href="/app/category/sentence/own/${categoryId}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Back</a>
                 </div>
 
                 <!-- Content Row -->
-                <div class="row">
+                <div class="row justify-content-center">
 
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th><p class="text-center">Polish Sentence</p></th>
-                            <th><p class="text-center">English Sentence</p></th>
-                            <th><p class="text-center">Buttons</p></th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <form method="post" class="word">
 
-                        <c:forEach items="${sentence}"  var="info">
-                            <tr>
-                                <td>
-                                    <p class="text-center text-primary ">${info.sentencePl}</p>
-                                </td>
-                                <td>
-                                    <p class="text-center text-primary ">${info.sentenceEn}</p>
-                                </td>
-                                <td width="15%">
-                                    <a href="/app/category/sentenceEdit/${info.id}" class="text-warning text-right">Edit</a>
-                                    <a href="/app/category/sentenceRemove/${info.id}" class="text-danger text-right">Remove</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                        <div class="form-group">
+                            Polish sentence:
+                            <input type="text" class="form-control form-control-user" name="sentencePl" value="${word.sentencePl}">
+                        </div>
+                        <div class="form-group">
+                            English sentence:
+                            <input type="text" class="form-control form-control-user" name="sentenceEn" value="${word.sentenceEn}">
+                        </div>
 
-                        </tbody>
-
-                    </table>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input type="submit" value="Update Account" class="btn btn-primary btn-user btn-block">
+                    </form>
 
                 </div>
 

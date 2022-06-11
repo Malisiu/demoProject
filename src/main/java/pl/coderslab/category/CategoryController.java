@@ -182,5 +182,23 @@ public class CategoryController {
         return "redirect:/app/category/words/own/" + categoryId;
     }
 
+    @GetMapping("/category/sentenceEdit/{id}")
+    public String editSentence(@PathVariable long id,Model model,@AuthenticationPrincipal UserDetails userDetails){
+        model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        Optional<Word> byId = wordRepository.findById(id);
+        model.addAttribute("word",byId.get());
+        model.addAttribute("categoryId",wordRepository.findById(id).get().getCategory().getId());
+        return "editSentence";
+    }
+
+    @PostMapping("/category/sentenceEdit/{id}")
+    public String editSentenceAction(@PathVariable long id,Word word){
+        Long categoryId = wordRepository.findCategoryId(id);
+        word.setCategory(categoryRepository.selectCat(categoryId));
+        wordRepository.save(word);
+        return "redirect:/app/category/sentence/own/" + categoryId;
+    }
+
+
 
 }
