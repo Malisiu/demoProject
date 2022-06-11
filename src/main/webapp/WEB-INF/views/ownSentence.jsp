@@ -225,7 +225,7 @@
                                     <p class="text-center text-primary ">${info.sentenceEn}</p>
                                 </td>
                                 <td width="15%">
-                                    <a href="/app/category/sentence/own/${info.id}" class="text-warning text-right">Sentence</a>
+                                    <a href="/app/category/sentence/own/${info.id}" class="text-warning text-right">Edit</a>
                                     <a href="/app/category/sentenceRemove/${info.id}" class="text-danger text-right">Remove</a>
                                 </td>
                             </tr>

@@ -164,4 +164,23 @@ public class CategoryController {
         wordRepository.deleteById(id);
         return "redirect:/app/category/sentence/own/" + byId.get().getCategory().getId();
     }
+
+    @GetMapping("/category/wordEdit/{id}")
+    public String editWord(@PathVariable long id,Model model,@AuthenticationPrincipal UserDetails userDetails){
+        model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        Optional<Word> byId = wordRepository.findById(id);
+        model.addAttribute("word",byId.get());
+        model.addAttribute("categoryId",wordRepository.findById(id).get().getCategory().getId());
+        return "editWord";
+    }
+
+    @PostMapping("/category/wordEdit/{id}")
+    public String editWordAction(@PathVariable long id,Word word){
+        Long categoryId = wordRepository.findCategoryId(id);
+        word.setCategory(categoryRepository.selectCat(categoryId));
+        wordRepository.save(word);
+        return "redirect:/app/category/words/own/" + categoryId;
+    }
+
+
 }

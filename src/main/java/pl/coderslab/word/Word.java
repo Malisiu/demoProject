@@ -17,6 +17,7 @@ public class Word {
     private Category category;
 
 
+
     public Long getId() {
         return id;
     }

@@ -225,7 +225,7 @@
                                     <p class="text-center text-primary ">${info.wordEn}</p>
                                 </td>
                                 <td width="15%">
-                                        <a href="/app/category/sentence/own/${info.id}" class="text-warning text-right">Sentence</a>
+                                        <a href="/app/category/wordEdit/${info.id}" class="text-warning text-right">Edit</a>
                                         <a href="/app/category/wordRemove/${info.id}" class="text-danger text-right">Remove</a>
                                 </td>
                             </tr>
