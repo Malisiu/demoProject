@@ -48,7 +48,8 @@ public class CategoryController {
     }
 
     @GetMapping("/achivments")
-    public String printAchivment(){
+    public String printAchivment(@AuthenticationPrincipal UserDetails userDetails,Model model){
+        model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
         return "achivments";
     }
 

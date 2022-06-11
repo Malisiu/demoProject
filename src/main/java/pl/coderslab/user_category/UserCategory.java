@@ -18,6 +18,26 @@ public class UserCategory {
     @ManyToOne
     private Category category;
 
+    private boolean isAchivedWord;
+
+    private boolean isAchivedSentence;
+
+    public boolean isAchivedWord() {
+        return isAchivedWord;
+    }
+
+    public void setAchivedWord(boolean achivedWord) {
+        isAchivedWord = achivedWord;
+    }
+
+    public boolean isAchivedSentence() {
+        return isAchivedSentence;
+    }
+
+    public void setAchivedSentence(boolean achivedSentence) {
+        isAchivedSentence = achivedSentence;
+    }
+
     public long getId() {
         return id;
     }
