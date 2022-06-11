@@ -216,20 +216,15 @@
                         <c:forEach items="${words}"  var="info">
                             <tr>
                                 <td><p class="text-center text-primary">${info.category.name}</p></td>
-                                <td>Word</td>
+                                <td><p class="text-center">Word</p></td>
                             </tr>
                         </c:forEach>
-
-                        </tbody>
-                        <tbody>
-
                         <c:forEach items="${sentence}"  var="info">
                             <tr>
-                                <td><p class="text-center">${info.category.name}</p></td>
-                                <td>Sentence</td>
+                                <td><p class="text-center text-primary">${info.category.name}</p></td>
+                                <td><p class="text-center">Sentence</p></td>
                             </tr>
                         </c:forEach>
-
                         </tbody>
                     </table>
 
