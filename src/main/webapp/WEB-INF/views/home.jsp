@@ -204,10 +204,10 @@
                 <!-- Content Row -->
                 <div class="startApp">
                     <div class="">
-                        <a href="/app/start/selectOwnWords"><p class="btn btn-primary btn user">Basic words</p></a>
+                        <a href="/app/start/selectBasicWords"><p class="btn btn-primary btn user">Basic words</p></a>
                     </div>
                     <div>
-                        <a href="/app/start/selectOwnSentence"><p class="btn btn-primary btn user">Basic sentence</p></a>
+                        <a href="/app/start/selectBasicSentence"><p class="btn btn-primary btn user">Basic sentence</p></a>
                     </div>
                     <div>
                         <a href="/app/start/selectOwnWords"><p class="btn btn-primary btn user">Own words</p></a>

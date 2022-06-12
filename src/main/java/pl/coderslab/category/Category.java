@@ -15,6 +15,7 @@ public class Category {
     private Boolean isAchivedSentence;
     private Boolean isBasic;
 
+
     public Boolean getBasic() {
         return isBasic;
     }
