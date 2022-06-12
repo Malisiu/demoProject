@@ -181,6 +181,7 @@
 
                 <!-- Topbar Search -->
 
+                <h2 class="h3 mb-0 text-gray-800">${user.nickName}</h2>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -198,23 +199,21 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Start</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                 </div>
 
                 <!-- Content Row -->
                 <div class="startApp">
                     <div class="">
-                        <a><p class="btn btn-primary btn user">Basic words</p></a>
+                        <a href="/app/start/selectOwnWords"><p class="btn btn-primary btn user">Basic words</p></a>
                     </div>
                     <div>
-                        <a><p class="btn btn-primary btn user">Basic sentence</p></a>
+                        <a href="/app/start/selectOwnSentence"><p class="btn btn-primary btn user">Basic sentence</p></a>
                     </div>
                     <div>
-                        <a><p class="btn btn-primary btn user">Own words</p></a>
+                        <a href="/app/start/selectOwnWords"><p class="btn btn-primary btn user">Own words</p></a>
                     </div>
                     <div>
-                        <a><p class="btn btn-primary btn user">Own sentence</p></a>
+                        <a href="/app/start/selectOwnSentence"><p class="btn btn-primary btn user">Own sentence</p></a>
                     </div>
 
                 </div>
