@@ -70,9 +70,25 @@ public class StartController {
     }
 
     @GetMapping("/start/test/basicWord")
-    public String testBasicWord(Model model, @AuthenticationPrincipal UserDetails userDetails,@RequestParam Long categoryId){
-        model.addAttribute("words",wordRepository.findAllByCategory_Id(categoryId));
+    public String testBasicWord(Model model, @AuthenticationPrincipal UserDetails userDetails,@RequestParam Long categoryId,@RequestParam int num,@RequestParam int score,@RequestParam int isTrue){
+        List<Word> allByCategory_id = wordRepository.findAllByCategory_Id(categoryId);
+        if (num == allByCategory_id.size()){
+            return "redirect:/app/start";
+        }
+        if (num >= 1 && isTrue == 1){
+            score++;
+
+
+
+
+        }
+        Word word = allByCategory_id.get(num);
+        System.out.println(word.getWordPl() + " " + word.getWordEn());
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        model.addAttribute("num",num);
+        model.addAttribute("categoryId",categoryId);
+        model.addAttribute("word",word);
+        model.addAttribute("score",score);
         return "testBasicWords";
     }
 
@@ -82,6 +98,8 @@ public class StartController {
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
         return "testBasicSentence";
     }
+
+
 
 
 }
