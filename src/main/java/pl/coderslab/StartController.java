@@ -100,12 +100,37 @@ public class StartController {
         return "testBasicWords";
     }
 
+
     @GetMapping("/start/test/basicSentence")
-    public String testBasicSentence(Model model, @AuthenticationPrincipal UserDetails userDetails,@RequestParam Long categoryId){
-        model.addAttribute("words",wordRepository.findAllByCategory_Id(categoryId));
+    public String testBasicSentence(Model model, @AuthenticationPrincipal UserDetails userDetails,@RequestParam Long categoryId,@RequestParam int num,@RequestParam int score,@RequestParam int isTrue){
+        List<Word> allByCategory_id = wordRepository.findAllByCategory_Id(categoryId);
+        if (num >= 1 && isTrue == 1){
+            score++;
+            UserWords byUserIdAndWordId = userWordRepository.findByUserIdAndWordId(userRepository.findByEmail(userDetails.getUsername()).getId(), allByCategory_id.get(num - 1).getId());
+            byUserIdAndWordId.setCorrectSentence(byUserIdAndWordId.getCorrectSentence() + 1);
+            userWordRepository.save(byUserIdAndWordId);
+        }
+        if (num >= 1 && isTrue == 0){
+            UserWords byUserIdAndWordId = userWordRepository.findByUserIdAndWordId(userRepository.findByEmail(userDetails.getUsername()).getId(), allByCategory_id.get(num - 1).getId());
+            byUserIdAndWordId.setWrongSentence(byUserIdAndWordId.getWrongSentence() + 1);
+            userWordRepository.save(byUserIdAndWordId);
+        }
+
+        if (num == allByCategory_id.size()){
+            return "redirect:/app/start";
+        }
+
+        Word word = allByCategory_id.get(num);
+        System.out.println(word.getWordPl() + " " + word.getWordEn());
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        model.addAttribute("num",num);
+        model.addAttribute("categoryId",categoryId);
+        model.addAttribute("word",word);
+        model.addAttribute("score",score);
         return "testBasicSentence";
     }
+
+
 
 
 

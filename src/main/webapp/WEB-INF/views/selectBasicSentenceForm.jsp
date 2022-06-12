@@ -138,6 +138,9 @@
                                 </c:forEach>
                             </select>
                         </div>
+                        <input type="hidden" name="num" value="0"/>
+                        <input type="hidden" name="score" value="0"/>
+                        <input type="hidden" name="isTrue" value="0"/>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <div><input type="submit" value="Start test" class="btn btn-primary btn-user btn-block"></div>
                     </form>

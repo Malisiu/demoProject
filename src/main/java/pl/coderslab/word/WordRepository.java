@@ -16,4 +16,7 @@ public interface WordRepository extends JpaRepository<Word,Long> {
     @Query("select w.category.id from Word w where w.id = ?1")
     Long findCategoryId(Long id);
 
+    @Query("select w from Word w join Category c on c.id = w.category.id where c.isBasic = true ")
+    List<Word> findAllBasicWords();
+
 }

@@ -127,13 +127,37 @@
 
                 <!-- Content Row -->
                 <div class="startApp">
+                    <div class="mb-5">
+                        <p class="text-center text-primary ">${word.sentencePl}</p>
+                        <div class="form-group">
+                            <input type="text" class="form-control answearToCheck"  placeholder="answear">
+                        </div>
 
-                    <c:forEach items="${words}" var="info">
-                        <p>${info.sentencePl}</p>
-                        <p>${info.sentenceEn}</p>
-                        <br>
-                    </c:forEach>
+                    </div>
 
+                    <form method="get"  action="/app/start/test/basicSentence" class="user">
+                        <input type="hidden" name="num" value="${num + 1}"/>
+                        <input type="hidden" id="correctAnswear" value="${word.sentenceEn}"/>
+                        <input type="hidden" class="isTrue" name="isTrue" value="0"/>
+                        <input type="hidden" name="categoryId" value="${categoryId}"/>
+                        <input type="hidden" name="score" value="${score}"/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <div class="showResult hideResult">
+                            <div class="correctDiv">
+                                <p class="infoResult">Correct Answear :)</p>
+                            </div>
+                            <div class="wrongDiv">
+                                <p class="infoResult">Wrong Answear :)</p>
+                                <p class="infoResult">Correct answear: ${word.sentenceEn}</p>
+                                <p class="infoResult yourAnswear">Your answear: </p>
+                            </div>
+                            <div>
+                                <input type="submit" value="Next" class="btn btn-primary btn-user btn-block myBtnTest">
+                            </div>
+                        </div>
+
+                    </form>
+                    <button class="btn btn-primary btn-user btn-block checkBtn">Check</button>
                 </div>
 
                 <!-- Content Row -->
@@ -200,6 +224,7 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+<script src="/js/demoJs.js"></script>
 
 <!-- Page level plugins -->
 <script src="vendor/chart.js/Chart.min.js"></script>

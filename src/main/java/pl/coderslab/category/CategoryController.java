@@ -84,7 +84,7 @@ public class CategoryController {
     @GetMapping(value = "/category/{id}")
     public String deleteCategory(@PathVariable long id,@AuthenticationPrincipal UserDetails userDetails){
         userCategoryRepository.deleteByCategoryId(id);
-        categoryRepository.deleteById(id);
+        //categoryRepository.deleteById(id);
         return "redirect:/app/category";
     }
 
@@ -103,6 +103,7 @@ public class CategoryController {
     @GetMapping("/category/words/own/{id}")
     public String printOwnWords(@PathVariable Long id,@AuthenticationPrincipal UserDetails userDetails,Model model){
         model.addAttribute("words",categoryRepository.findAllOwnWords(id));
+        categoryRepository.findAllOwnWords(id).forEach(el -> System.out.println(el.getWordPl()));
         model.addAttribute("categoryId",id);
         return "ownWords";
     }
