@@ -41,7 +41,7 @@ public class StartController {
 
     @GetMapping("/start/selectOwnWords")
     public String selectOwnWords(Model model, @AuthenticationPrincipal UserDetails userDetails){
-        model.addAttribute("basic",categoryRepository.basicCategory());
+        model.addAttribute("basic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
         model.addAttribute("noBasic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
         return "selectOwnWordsForm";
@@ -49,7 +49,7 @@ public class StartController {
 
     @GetMapping("/start/selectOwnSentence")
     public String selectOwnSentence(Model model, @AuthenticationPrincipal UserDetails userDetails){
-        model.addAttribute("basic",categoryRepository.basicCategory());
+        model.addAttribute("basic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
         model.addAttribute("noBasic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
         return "selectOwnSentenceForm";
@@ -131,6 +131,9 @@ public class StartController {
                 byUserIdAndCategoryId.setAchivedSentence(true);
                 userCategoryRepository.save(byUserIdAndCategoryId);
             }
+            User byEmail = userRepository.findByEmail(userDetails.getUsername());
+            byEmail.setPoints(byEmail.getPoints() + score);
+            userRepository.save(byEmail);
             return "redirect:/app/start";
         }
 
@@ -144,7 +147,63 @@ public class StartController {
         return "testBasicSentence";
     }
 
+    @GetMapping("/start/test/ownWord")
+    public String testOwnWord(Model model, @AuthenticationPrincipal UserDetails userDetails,@RequestParam Long categoryId,@RequestParam int num,@RequestParam int score,@RequestParam int isTrue){
+        List<Word> allByCategory_id = wordRepository.findAllByCategory_Id(categoryId);
 
+        if (num >= 1 && isTrue == 1){
+            score++;
+            UserWords byUserIdAndWordId = userWordRepository.findByUserIdAndWordId(userRepository.findByEmail(userDetails.getUsername()).getId(), allByCategory_id.get(num - 1).getId());
+            byUserIdAndWordId.setCorrectWord(byUserIdAndWordId.getCorrectWord() + 1);
+            userWordRepository.save(byUserIdAndWordId);
+        }
+        if (num >= 1 && isTrue == 0){
+            UserWords byUserIdAndWordId = userWordRepository.findByUserIdAndWordId(userRepository.findByEmail(userDetails.getUsername()).getId(), allByCategory_id.get(num - 1).getId());
+            byUserIdAndWordId.setWrongWord(byUserIdAndWordId.getWrongWord() + 1);
+            userWordRepository.save(byUserIdAndWordId);
+        }
+
+        if (num == allByCategory_id.size()){
+            return "redirect:/app/start";
+        }
+
+        Word word = allByCategory_id.get(num);
+        System.out.println(word.getWordPl() + " " + word.getWordEn());
+        model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        model.addAttribute("num",num);
+        model.addAttribute("categoryId",categoryId);
+        model.addAttribute("word",word);
+        model.addAttribute("score",score);
+        return "testOwnWords";
+    }
+
+    @GetMapping("/start/test/ownSentence")
+    public String testOwnSentence(Model model, @AuthenticationPrincipal UserDetails userDetails,@RequestParam Long categoryId,@RequestParam int num,@RequestParam int score,@RequestParam int isTrue){
+        List<Word> allByCategory_id = wordRepository.findAllByCategory_Id(categoryId);
+        if (num >= 1 && isTrue == 1){
+            score++;
+            UserWords byUserIdAndWordId = userWordRepository.findByUserIdAndWordId(userRepository.findByEmail(userDetails.getUsername()).getId(), allByCategory_id.get(num - 1).getId());
+            byUserIdAndWordId.setCorrectSentence(byUserIdAndWordId.getCorrectSentence() + 1);
+            userWordRepository.save(byUserIdAndWordId);
+        }
+        if (num >= 1 && isTrue == 0){
+            UserWords byUserIdAndWordId = userWordRepository.findByUserIdAndWordId(userRepository.findByEmail(userDetails.getUsername()).getId(), allByCategory_id.get(num - 1).getId());
+            byUserIdAndWordId.setWrongSentence(byUserIdAndWordId.getWrongSentence() + 1);
+            userWordRepository.save(byUserIdAndWordId);
+        }
+
+        if (num == allByCategory_id.size()){
+            return "redirect:/app/start";
+        }
+
+        Word word = allByCategory_id.get(num);
+        model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        model.addAttribute("num",num);
+        model.addAttribute("categoryId",categoryId);
+        model.addAttribute("word",word);
+        model.addAttribute("score",score);
+        return "testOwnSentence";
+    }
 
 
 

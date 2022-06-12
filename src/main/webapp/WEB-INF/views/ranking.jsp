@@ -209,16 +209,14 @@
                         <thead>
                         <tr>
                             <th>Nick name</th>
-                            <th>Achivments</th>
                             <th>Points</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        <c:forEach items="${ranking}"  begin="0" end="9" var="info">
+                        <c:forEach items="${ranking}" varStatus="a"  begin="0" end="9" var="info">
                             <tr>
                                 <td>${info.nickName}</td>
-                                <td>0</td>
                                 <td>${info.points}</td>
                             </tr>
                         </c:forEach>

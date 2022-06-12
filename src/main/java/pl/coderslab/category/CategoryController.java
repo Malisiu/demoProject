@@ -60,6 +60,7 @@ public class CategoryController {
     public String printRanking(Model model, @AuthenticationPrincipal UserDetails userDetails){
         model.addAttribute("ranking",userRepository.ranking());
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        model.addAttribute("achiv",userCategoryRepository.countSentenceAchivments(userRepository.findByEmail(userDetails.getUsername()).getId()) + userCategoryRepository.countWordAchivments(userRepository.findByEmail(userDetails.getUsername()).getId()));
         return "ranking";
     }
 

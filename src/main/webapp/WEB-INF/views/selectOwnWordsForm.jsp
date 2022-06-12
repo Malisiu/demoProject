@@ -128,6 +128,22 @@
                 <!-- Content Row -->
                 <div class="startApp">
 
+                    <form method="get" action="/app/start/test/ownWord" class="user">
+                        <div class="mb-5">
+                            <p>Select category</p>
+
+                            <select name="categoryId">
+                                <c:forEach items="${basic}" var="info">
+                                    <option value="${info.id}">${info.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <input type="hidden" name="num" value="0"/>
+                        <input type="hidden" name="score" value="0"/>
+                        <input type="hidden" name="isTrue" value="0"/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <div><input type="submit" value="Start test" class="btn btn-primary btn-user btn-block"></div>
+                    </form>
 
                 </div>
 
