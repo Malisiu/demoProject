@@ -12,6 +12,7 @@ import pl.coderslab.category.Category;
 import pl.coderslab.category.CategoryRepository;
 import pl.coderslab.user.User;
 import pl.coderslab.user.UserRepository;
+import pl.coderslab.user_category.UserCategory;
 import pl.coderslab.user_category.UserCategoryRepository;
 import pl.coderslab.user_words.UserWordRepository;
 import pl.coderslab.user_words.UserWords;
@@ -87,6 +88,14 @@ public class StartController {
         }
 
         if (num == allByCategory_id.size()){
+            if (score == allByCategory_id.size()){
+                UserCategory byUserIdAndCategoryId = userCategoryRepository.findByUserIdAndCategoryId(userRepository.findByEmail(userDetails.getUsername()).getId(), (Long) categoryId);
+                byUserIdAndCategoryId.setAchivedWord(true);
+                userCategoryRepository.save(byUserIdAndCategoryId);
+            }
+            User byEmail = userRepository.findByEmail(userDetails.getUsername());
+            byEmail.setPoints(byEmail.getPoints() + score);
+            userRepository.save(byEmail);
             return "redirect:/app/start";
         }
 
@@ -117,6 +126,11 @@ public class StartController {
         }
 
         if (num == allByCategory_id.size()){
+            if (score == allByCategory_id.size()){
+                UserCategory byUserIdAndCategoryId = userCategoryRepository.findByUserIdAndCategoryId(userRepository.findByEmail(userDetails.getUsername()).getId(), (Long) categoryId);
+                byUserIdAndCategoryId.setAchivedSentence(true);
+                userCategoryRepository.save(byUserIdAndCategoryId);
+            }
             return "redirect:/app/start";
         }
 

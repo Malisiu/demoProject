@@ -20,4 +20,7 @@ public interface UserCategoryRepository extends JpaRepository<UserCategory,Long>
     @Query("select uc from UserCategory uc where uc.isAchivedSentence = true and uc.user.id = ?1")
     List<UserCategory> findBySentenceAchived(Long id);
 
+    @Query("select uc from UserCategory uc where uc.user.id = ?1 and uc.category.id = ?2")
+    UserCategory findByUserIdAndCategoryId(Long userId,Long categoryId);
+
 }
