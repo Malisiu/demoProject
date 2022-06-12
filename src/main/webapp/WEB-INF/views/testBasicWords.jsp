@@ -138,7 +138,7 @@
                     <form method="get"  action="/app/start/test/basicWord" class="user">
                         <input type="hidden" name="num" value="${num + 1}"/>
                         <input type="hidden" id="correctAnswear" value="${word.wordEn}"/>
-                        <input type="hidden" name="isTrue" value="0"/>
+                        <input type="hidden" class="isTrue" name="isTrue" value="0"/>
                         <input type="hidden" name="categoryId" value="${categoryId}"/>
                         <input type="hidden" name="score" value="${score}"/>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -14,6 +14,7 @@ import pl.coderslab.user.User;
 import pl.coderslab.user.UserRepository;
 import pl.coderslab.user_category.UserCategoryRepository;
 import pl.coderslab.user_words.UserWordRepository;
+import pl.coderslab.user_words.UserWords;
 import pl.coderslab.word.Word;
 import pl.coderslab.word.WordRepository;
 
@@ -72,16 +73,23 @@ public class StartController {
     @GetMapping("/start/test/basicWord")
     public String testBasicWord(Model model, @AuthenticationPrincipal UserDetails userDetails,@RequestParam Long categoryId,@RequestParam int num,@RequestParam int score,@RequestParam int isTrue){
         List<Word> allByCategory_id = wordRepository.findAllByCategory_Id(categoryId);
+
+        if (num >= 1 && isTrue == 1){
+            score++;
+            UserWords byUserIdAndWordId = userWordRepository.findByUserIdAndWordId(userRepository.findByEmail(userDetails.getUsername()).getId(), allByCategory_id.get(num - 1).getId());
+            byUserIdAndWordId.setCorrectWord(byUserIdAndWordId.getCorrectWord() + 1);
+            userWordRepository.save(byUserIdAndWordId);
+        }
+        if (num >= 1 && isTrue == 0){
+            UserWords byUserIdAndWordId = userWordRepository.findByUserIdAndWordId(userRepository.findByEmail(userDetails.getUsername()).getId(), allByCategory_id.get(num - 1).getId());
+            byUserIdAndWordId.setWrongWord(byUserIdAndWordId.getWrongWord() + 1);
+            userWordRepository.save(byUserIdAndWordId);
+        }
+
         if (num == allByCategory_id.size()){
             return "redirect:/app/start";
         }
-        if (num >= 1 && isTrue == 1){
-            score++;
 
-
-
-
-        }
         Word word = allByCategory_id.get(num);
         System.out.println(word.getWordPl() + " " + word.getWordEn());
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));

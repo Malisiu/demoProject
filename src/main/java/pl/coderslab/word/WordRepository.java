@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.category.Category;
+import pl.coderslab.user_words.UserWords;
 
 import java.util.List;
 
