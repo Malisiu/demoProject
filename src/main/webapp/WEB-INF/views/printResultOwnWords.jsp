@@ -131,7 +131,7 @@
                     <form method="get"  action="/app/start" class="user">
                             <div>
                                 <p class="infoResult">Your score: ${points}/${score}</p>
-                                <p class="infoResult">Points +${score}</p>
+                                <p class="infoResult">Points +${points}</p>
                             </div>
                             <div>
                                 <input type="submit" value="Next" class="btn btn-primary btn-user btn-block myBtnTest">

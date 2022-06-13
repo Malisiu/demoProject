@@ -40,19 +40,20 @@ public class LoginController {
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String login() {
-        return "admin/login";
+        return "login";
     }
 
 
 
     @RequestMapping(value = {"/register"}, method = RequestMethod.GET)
     public String register() {
-        return "admin/register";
+        return "regiestr";
     }
 
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
     public String performRegister(User user) {
         userService.saveUser(user);
+        System.out.println(user.getPoints());
         List<Category> categories = categoryRepository.basicCategory();
         categories.forEach(el -> {
             UserCategory userCategory = new UserCategory();
