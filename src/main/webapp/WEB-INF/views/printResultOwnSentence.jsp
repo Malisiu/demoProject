@@ -44,116 +44,44 @@
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-      <a class="nav-link" href="/app/start">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Start</span></a>
-    </li>
+
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+
 
     <!-- Heading -->
-    <div class="sidebar-heading">
-      Interface
-    </div>
+
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="/app/category" data-toggle="collapse" data-target="#collapseTwo"
-         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Category</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Custom Components:</h6>
-          <a class="collapse-item" href="buttons.html">Buttons</a>
-          <a class="collapse-item" href="cards.html">Cards</a>
-        </div>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="/app/achivments" data-toggle="collapse" data-target="#collapseTwo"
-         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Achivments</span>
-      </a>
-
-    </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="/app/ranking" data-toggle="collapse" data-target="#collapseUtilities"
-         aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-wrench"></i>
-        <span>Ranking</span>
-      </a>
-      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-           data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Custom Utilities:</h6>
-          <a class="collapse-item" href="utilities-color.html">Colors</a>
-          <a class="collapse-item" href="utilities-border.html">Borders</a>
-          <a class="collapse-item" href="utilities-animation.html">Animations</a>
-          <a class="collapse-item" href="utilities-other.html">Other</a>
-        </div>
-      </div>
-    </li>
+
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+
 
     <!-- Heading -->
-    <div class="sidebar-heading">
-      Settings
-    </div>
+
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="/app/profile" data-toggle="collapse" data-target="#collapsePages"
-         aria-expanded="true" aria-controls="collapsePages">
-        <i class="fas fa-fw fa-folder"></i>
-        <span>Profile</span>
-      </a>
-      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Login Screens:</h6>
-          <a class="collapse-item" href="login.html">Login</a>
-          <a class="collapse-item" href="register.html">Register</a>
-          <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-          <div class="collapse-divider"></div>
-          <h6 class="collapse-header">Other Pages:</h6>
-          <a class="collapse-item" href="404.html">404 Page</a>
-          <a class="collapse-item" href="blank.html">Blank Page</a>
-        </div>
-      </div>
-    </li>
+
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-      <a class="nav-link" href="/app/settings">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Settings</span></a>
-    </li>
+
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link" >
-        <form action="<c:url value="/logout"/>" method="post">
-          <input type="submit" class="btn-primary" value="LogOut">
-          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-      </a>
-    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
+
+
+    <!-- Sidebar Message -->
 
 
   </ul>
@@ -192,29 +120,23 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Words</h1>
-          <a href="/app/category/words/own/${categoryId}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                  class="fas fa-download fa-sm text-white-50"></i> Back</a>
+          <h1 class="h3 mb-0 text-gray-800">Result</h1>
+          <a href="/app/start" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                  class="fas fa-download fa-sm text-white-50"></i> Menu</a>
         </div>
 
         <!-- Content Row -->
-        <div class="row justify-content-center">
+        <div class="startApp scoreTable">
 
-          <form method="post" class="word">
-
-            <div class="form-group">
-              Polish word:
-              <input type="text" class="form-control form-control-user" name="wordPl" value="${word.wordPl}">
+          <form method="get"  action="/app/start" class="user">
+            <div>
+              <p class="infoResult">Your score: ${points}/${score}</p>
             </div>
-            <div class="form-group">
-              English word:
-              <input type="text" class="form-control form-control-user" name="wordEn" value="${word.wordEn}">
+            <div>
+              <input type="submit" value="Next" class="btn btn-primary btn-user btn-block myBtnTest">
             </div>
 
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="submit" value="Update Account" class="btn btn-primary btn-user btn-block">
           </form>
-
         </div>
 
         <!-- Content Row -->

@@ -180,7 +180,7 @@ public class StartController {
         }
 
         if (num == allByCategory_id.size()){
-            return "redirect:/app/ownWordsResult/" + score + "/" + num;
+            return "redirect:/app/ownSentenceResult/" + score + "/" + num;
         }
 
         Word word = allByCategory_id.get(num);
@@ -208,7 +208,7 @@ public class StartController {
         }
 
         if (num == allByCategory_id.size()){
-            return "redirect:/app/ownWordsResult/" + score + "/" + num;
+            return "redirect:/app/ownSentenceResult/" + score + "/" + num;
         }
 
         Word word = allByCategory_id.get(num);

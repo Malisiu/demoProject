@@ -130,19 +130,26 @@
 
                     <form method="get" action="/app/start/test/ownSentence" class="user">
                         <div class="mb-5">
-                            <p>Select category</p>
-
-                            <select name="categoryId">
+                            <c:if test="${empty basic}">
+                                <p class="text-center text-danger">You have no sentence...</p>
+                            </c:if>
+                            <c:if test="${!empty basic}">
+                                <p>Select category</p>
+                                <select name="categoryId">
                                 <c:forEach items="${basic}" var="info">
-                                    <option value="${info.id}">${info.name}</option>
+                                        <option value="${info.id}">${info.name}</option>
                                 </c:forEach>
-                            </select>
+                                </select>
+                            </c:if>
                         </div>
                         <input type="hidden" name="num" value="0"/>
                         <input type="hidden" name="score" value="0"/>
                         <input type="hidden" name="isTrue" value="0"/>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <div><input type="submit" value="Start test" class="btn btn-primary btn-user btn-block"></div>
+                        <c:if test="${!empty basic}">
+                            <div><input type="submit" value="Start test" class="btn btn-primary btn-user btn-block"></div>
+                        </c:if>
+
                     </form>
 
                 </div>

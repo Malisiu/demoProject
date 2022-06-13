@@ -130,13 +130,18 @@
 
                     <form method="get" action="/app/start/test/ownWord" class="user">
                         <div class="mb-5">
-                            <p>Select category</p>
+                            <c:if test="${empty basic}">
+                                <p class="text-center text-danger">You have no words...</p>
+                            </c:if>
+                            <c:if test="${!empty basic}">
+                                <p>Select category</p>
+                                <select name="categoryId">
+                                    <c:forEach items="${basic}" var="info">
+                                        <option value="${info.id}">${info.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:if>
 
-                            <select name="categoryId">
-                                <c:forEach items="${basic}" var="info">
-                                    <option value="${info.id}">${info.name}</option>
-                                </c:forEach>
-                            </select>
                         </div>
                         <input type="hidden" name="num" value="0"/>
                         <input type="hidden" name="score" value="0"/>
