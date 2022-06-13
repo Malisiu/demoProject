@@ -120,44 +120,24 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Good luck :)</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Result</h1>
                     <a href="/app/start" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Back</a>
+                            class="fas fa-download fa-sm text-white-50"></i> Menu</a>
                 </div>
 
                 <!-- Content Row -->
-                <div class="startApp">
-                    <div class="mb-5">
-                        <p class="text-center text-primary ">${word.wordPl}</p>
-                        <div class="form-group">
-                            <input type="text" class="form-control answearToCheck"  placeholder="answear">
-                        </div>
+                <div class="startApp scoreTable">
 
-                    </div>
-
-                    <form method="get"  action="/app/start/test/ownWord" class="user">
-                        <input type="hidden" name="num" value="${num + 1}"/>
-                        <input type="hidden" id="correctAnswear" value="${word.wordEn}"/>
-                        <input type="hidden" class="isTrue" name="isTrue" value="0"/>
-                        <input type="hidden" name="categoryId" value="${categoryId}"/>
-                        <input type="hidden" name="score" value="${score}"/>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <div class="showResult hideResult">
-                            <div class="correctDiv">
-                                <p class="infoResult">Correct Answear :)</p>
-                            </div>
-                            <div class="wrongDiv">
-                                <p class="infoResult">Wrong Answear :)</p>
-                                <p class="infoResult">Correct answear: ${word.wordEn}</p>
-                                <p class="infoResult yourAnswear">Your answear: </p>
+                    <form method="get"  action="/app/start" class="user">
+                            <div>
+                                <p class="infoResult">Your score: ${points}/${score}</p>
+                                <p class="infoResult">Points +${score}</p>
                             </div>
                             <div>
                                 <input type="submit" value="Next" class="btn btn-primary btn-user btn-block myBtnTest">
                             </div>
-                        </div>
 
                     </form>
-                    <button class="btn btn-primary btn-user btn-block checkBtn">Check</button>
                 </div>
 
                 <!-- Content Row -->
@@ -224,7 +204,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
-<script src="/js/demoJs.js"></script>
 
 <!-- Page level plugins -->
 <script src="vendor/chart.js/Chart.min.js"></script>

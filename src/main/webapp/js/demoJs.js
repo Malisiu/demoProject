@@ -10,7 +10,7 @@ const isTrue = document.querySelector(".isTrue");
 myDiv.addEventListener("keypress",function (event){
     if (event.key === "Enter" && (myDiv.classList.contains("hideResult") === false)){
         event.preventDefault();
-        myBtnTest.click();
+        myBtnTest.click();x
     }
 })
 

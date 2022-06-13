@@ -19,6 +19,7 @@ import pl.coderslab.user_words.UserWords;
 import pl.coderslab.word.Word;
 import pl.coderslab.word.WordRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,15 +42,30 @@ public class StartController {
 
     @GetMapping("/start/selectOwnWords")
     public String selectOwnWords(Model model, @AuthenticationPrincipal UserDetails userDetails){
-        model.addAttribute("basic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
-        model.addAttribute("noBasic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
+        List<Long> idCategoryOwnWorda = wordRepository.findIdCategoryOwnWorda(userRepository.findByEmail(userDetails.getUsername()).getId());
+        List<Category> categories = new ArrayList<>();
+        idCategoryOwnWorda.forEach(el -> {
+            if (categoryRepository.findById(el).get().getBasic() == false){
+                categories.add(categoryRepository.selectCat(el));
+            };
+        });
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
+        model.addAttribute("basic",categories);
+        model.addAttribute("noBasic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
         return "selectOwnWordsForm";
     }
 
     @GetMapping("/start/selectOwnSentence")
     public String selectOwnSentence(Model model, @AuthenticationPrincipal UserDetails userDetails){
-        model.addAttribute("basic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
+        List<Long> idCategoryOwnWorda = wordRepository.findIdCategoryOwnSentence(userRepository.findByEmail(userDetails.getUsername()).getId());
+        List<Category> categories = new ArrayList<>();
+        idCategoryOwnWorda.forEach(el -> {
+            if (categoryRepository.findById(el).get().getBasic() == false){
+                System.out.println(el);
+                categories.add(categoryRepository.selectCat(el));
+            };
+        });
+        model.addAttribute("basic",categories);
         model.addAttribute("noBasic",categoryRepository.userCategory(userRepository.findByEmail(userDetails.getUsername()).getId()));
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
         return "selectOwnSentenceForm";
@@ -96,7 +112,7 @@ public class StartController {
             User byEmail = userRepository.findByEmail(userDetails.getUsername());
             byEmail.setPoints(byEmail.getPoints() + score);
             userRepository.save(byEmail);
-            return "redirect:/app/start";
+            return "redirect:/app/ownWordsResult/" + score + "/" + num;
         }
 
         Word word = allByCategory_id.get(num);
@@ -134,7 +150,7 @@ public class StartController {
             User byEmail = userRepository.findByEmail(userDetails.getUsername());
             byEmail.setPoints(byEmail.getPoints() + score);
             userRepository.save(byEmail);
-            return "redirect:/app/start";
+            return "redirect:/app/ownWordsResult/" + score + "/" + num;
         }
 
         Word word = allByCategory_id.get(num);
@@ -164,11 +180,10 @@ public class StartController {
         }
 
         if (num == allByCategory_id.size()){
-            return "redirect:/app/start";
+            return "redirect:/app/ownWordsResult/" + score + "/" + num;
         }
 
         Word word = allByCategory_id.get(num);
-        System.out.println(word.getWordPl() + " " + word.getWordEn());
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
         model.addAttribute("num",num);
         model.addAttribute("categoryId",categoryId);
@@ -193,7 +208,7 @@ public class StartController {
         }
 
         if (num == allByCategory_id.size()){
-            return "redirect:/app/start";
+            return "redirect:/app/ownWordsResult/" + score + "/" + num;
         }
 
         Word word = allByCategory_id.get(num);
