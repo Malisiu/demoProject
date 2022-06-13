@@ -15,4 +15,12 @@ public class NoLogController {
     public String hello(){
         return "homeNoLog";
     }
+    @GetMapping("/contact")
+    public String printContact(){
+        return "contact";
+    }
+    @GetMapping("/about")
+    public String printAbout(){
+        return "about";
+    }
 }
