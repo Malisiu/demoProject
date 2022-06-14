@@ -4,10 +4,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import pl.coderslab.RankingRepository;
 import pl.coderslab.user.User;
 import pl.coderslab.user.UserRepository;
 import pl.coderslab.user_category.UserCategory;
@@ -17,6 +15,8 @@ import pl.coderslab.user_words.UserWords;
 import pl.coderslab.word.Word;
 import pl.coderslab.word.WordRepository;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,13 +29,15 @@ public class CategoryController {
     private final UserCategoryRepository userCategoryRepository;
     private final WordRepository wordRepository;
     private final UserWordRepository userWordRepository;
+    private final RankingRepository rankingRepository;
 
-    public CategoryController(CategoryRepository categoryRepository, UserRepository userRepository, UserCategoryRepository userCategoryRepository, WordRepository wordRepository, UserWordRepository userWordRepository) {
+    public CategoryController(CategoryRepository categoryRepository, UserRepository userRepository, UserCategoryRepository userCategoryRepository, WordRepository wordRepository, UserWordRepository userWordRepository, RankingRepository rankingRepository) {
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
         this.userCategoryRepository = userCategoryRepository;
         this.wordRepository = wordRepository;
         this.userWordRepository = userWordRepository;
+        this.rankingRepository = rankingRepository;
     }
 
     @GetMapping("/category")
@@ -205,6 +207,17 @@ public class CategoryController {
         return "redirect:/app/category/sentence/own/" + categoryId;
     }
 
+    @GetMapping("/worstWords")
+    public String printWorstWords(Model model,@AuthenticationPrincipal UserDetails userDetails){
+        List<UserWords> allUserWords = rankingRepository.findAllUserWords(userRepository.findByEmail(userDetails.getUsername()).getId());
+        allUserWords.forEach(el -> {
+            System.out.println(el.getWord().getWordPl() + " " + el.getWord().getWordEn());
+            System.out.println((double)el.getCorrectWord() / ((double)el.getCorrectWord() + (double)el.getWrongWord()));
+
+        });
+        model.addAttribute("words",allUserWords);
+        return "worstWords";
+    }
 
 
 }

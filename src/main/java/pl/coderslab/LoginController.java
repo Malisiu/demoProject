@@ -31,7 +31,6 @@ public class LoginController {
         this.userService = userService;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
-
         this.userCategoryRepository = userCategoryRepository;
         this.categoryRepository = categoryRepository;
         this.userWordRepository = userWordRepository;
