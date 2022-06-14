@@ -13,4 +13,7 @@ public interface RankingRepository extends JpaRepository<UserWords,Long> {
     @Query("select uw from UserWords uw where uw.user.id = ?1 and (uw.correctWord + uw.wrongWord) > 0 and uw.word.category.isBasic is true order by (uw.correctWord/(uw.correctWord + uw.wrongWord))")
     List<UserWords> findAllUserWords(Long userId);
 
+    @Query("select uw from UserWords uw where uw.user.id = ?1 and (uw.correctSentence + uw.wrongSentence) > 0 and uw.word.category.isBasic is true order by (uw.correctSentence/(uw.correctSentence + uw.wrongSentence))")
+    List<UserWords> findAllUserSentence(Long userId);
+
 }

@@ -198,7 +198,7 @@
                 <div class="row">
                     <div class="divButtonRankin">
                         <a href="/app/ranking" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">Ranking</a> <a href="/app/worstWords" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Worst words</a>
-                        <a class="rankBtn d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Worst sentence</a>
+                        <a href="/app/worstSentence" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Worst sentence</a>
                     </div>
 
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

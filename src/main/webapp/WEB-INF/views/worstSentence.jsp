@@ -197,15 +197,15 @@
                 <!-- Content Row -->
                 <div class="row">
                     <div class="divButtonRankin">
-                        <a href="/app/ranking" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Ranking</a> <a href="/app/worstWords" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">Worst words</a>
-                        <a href="/app/worstSentence" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Worst sentence</a>
+                        <a href="/app/ranking" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Ranking</a> <a href="/app/worstWords" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Worst words</a>
+                        <a href="/app/worstSentence" class="rankBtn d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">Worst sentence</a>
                     </div>
 
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>WordPl</th>
-                            <th>WordEn</th>
+                            <th>SentencePl</th>
+                            <th>SentenceEn</th>
                             <th>Correct</th>
                             <th>Wrong</th>
                             <th>Category</th>
@@ -215,10 +215,10 @@
 
                         <c:forEach items="${words}" varStatus="a"  begin="0" end="9" var="info">
                             <tr>
-                                <td>${info.word.wordPl}</td>
-                                <td>${info.word.wordEn}</td>
-                                <td>${info.correctWord}</td>
-                                <td>${info.wrongWord}</td>
+                                <td>${info.word.sentencePl}</td>
+                                <td>${info.word.sentenceEn}</td>
+                                <td>${info.correctSentence}</td>
+                                <td>${info.wrongSentence}</td>
                                 <td>${info.word.category.name}</td>
                             </tr>
                         </c:forEach>

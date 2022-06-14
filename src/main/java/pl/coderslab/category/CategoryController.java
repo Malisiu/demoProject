@@ -210,14 +210,17 @@ public class CategoryController {
     @GetMapping("/worstWords")
     public String printWorstWords(Model model,@AuthenticationPrincipal UserDetails userDetails){
         List<UserWords> allUserWords = rankingRepository.findAllUserWords(userRepository.findByEmail(userDetails.getUsername()).getId());
-        allUserWords.forEach(el -> {
-            System.out.println(el.getWord().getWordPl() + " " + el.getWord().getWordEn());
-            System.out.println((double)el.getCorrectWord() / ((double)el.getCorrectWord() + (double)el.getWrongWord()));
-
-        });
         model.addAttribute("words",allUserWords);
         return "worstWords";
     }
+
+    @GetMapping("/worstSentence")
+    public String printWorstSentence(Model model,@AuthenticationPrincipal UserDetails userDetails){
+        List<UserWords> allUserWords = rankingRepository.findAllUserSentence(userRepository.findByEmail(userDetails.getUsername()).getId());
+        model.addAttribute("words",allUserWords);
+        return "worstSentence";
+    }
+
 
 
 }

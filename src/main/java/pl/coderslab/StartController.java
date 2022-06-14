@@ -46,7 +46,9 @@ public class StartController {
         List<Category> categories = new ArrayList<>();
         idCategoryOwnWorda.forEach(el -> {
             if (categoryRepository.findById(el).get().getBasic() == false){
-                categories.add(categoryRepository.selectCat(el));
+                if (userCategoryRepository.findByOwnId(el) != null){
+                    categories.add(categoryRepository.selectCat(el));
+                }
             };
         });
         model.addAttribute("user",userRepository.findByEmail(userDetails.getUsername()));
@@ -61,8 +63,9 @@ public class StartController {
         List<Category> categories = new ArrayList<>();
         idCategoryOwnWorda.forEach(el -> {
             if (categoryRepository.findById(el).get().getBasic() == false){
-                System.out.println(el);
-                categories.add(categoryRepository.selectCat(el));
+                if (userCategoryRepository.findByOwnId(el) != null){
+                    categories.add(categoryRepository.selectCat(el));
+                }
             };
         });
         model.addAttribute("basic",categories);

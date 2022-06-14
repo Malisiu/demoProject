@@ -29,4 +29,7 @@ public interface UserCategoryRepository extends JpaRepository<UserCategory,Long>
     @Query("select count(uc.isAchivedSentence) from UserCategory uc where uc.isAchivedSentence = true and uc.user.id = ?1")
     Integer countSentenceAchivments(Long userId);
 
+    @Query("select uc from UserCategory uc where uc.category.id = ?1")
+    UserCategory findByOwnId(Long id);
+
 }
