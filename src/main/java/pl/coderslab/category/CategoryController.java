@@ -131,7 +131,8 @@ public class CategoryController {
         word.setSentenceEn(null);
         word.setSentencePl(null);
         word.setCategory(category);
-        wordRepository.save(word);
+        Word save = wordRepository.save(word);
+        System.out.println(save.getId());
         List<Word> allByCategory_id = wordRepository.findAllByCategory_Id(category.getId());
         User byEmail = userRepository.findByEmail(userDetails.getUsername());
         userWordRepository.createUserWord(byEmail.getId(),allByCategory_id.get(allByCategory_id.size() - 1).getId());

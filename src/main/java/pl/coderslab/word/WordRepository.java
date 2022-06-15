@@ -27,4 +27,6 @@ public interface WordRepository extends JpaRepository<Word,Long> {
     @Query("select distinct w.category.id from Word w join UserWords uw on w.id = uw.word.id where uw.user.id = ?1 and w.sentencePl is not null  and w.sentenceEn is not null")
     List<Long> findIdCategoryOwnSentence(Long id);
 
+
+
 }
